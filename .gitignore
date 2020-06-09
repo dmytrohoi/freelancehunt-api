@@ -1,0 +1,17 @@
+# Dev settings/cache
+.*/
+
+# Environment settings
+.env
+
+# Python package
+dist/
+build/
+
+*.egg-info/
+
+*/__pycache__*
+
+# Tests cache
+.coverage
+htmlcov/
