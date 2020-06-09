@@ -4,7 +4,7 @@ from .base import FreelancehuntObject
 
 
 __all__ = [
-    'Reviews'
+    'Reviews',
     'ReviewEntity'
 ]
 
