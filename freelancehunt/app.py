@@ -74,9 +74,9 @@ class FreelanceHuntClient(FreelancehuntObject):
     @property
     def countries(self):
         """TODO: Write comments."""
-        if not hasattr(self, '_counties'):
-            self._counties = Countries()
-        return self._counties
+        if not hasattr(self, '_countries'):
+            self._countries = Countries()
+        return self._countries
 
     @property
     def skills(self):

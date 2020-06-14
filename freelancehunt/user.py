@@ -53,7 +53,7 @@ class UserEntity(FreelancehuntObject):
         self.links = links
 
         # Custom attributes
-        self.api_url = f"/{self.type}s/{self.id}"
+        self._api_url = f"/{self.type}s/{self.id}"
 
     @property
     def full_name(self):
@@ -68,12 +68,12 @@ class UserEntity(FreelancehuntObject):
     @property
     def reviews(self):
         if not hasattr(self, '_reviews'):
-            responce = self._get(self.api_url + '/reviews')
+            responce = self._get(self._api_url + '/reviews')
             self._reviews = [ReviewEntity.de_json(**data) for data in responce]
         return self._reviews
 
     def load_details(self):
-        responce = self._get(self.api_url)
+        responce = self._get(self._api_url)
         self = self.de_json(**responce)
         return self
 
@@ -92,6 +92,16 @@ class UserEntity(FreelancehuntObject):
             elif data["type"] == "employer":
                 return EmployerEntity(**data)
         return cls(**data)
+
+    def __getattribute__(self, item):
+        if item not in self.__dict__:
+            raise AttributeError
+
+        value = self.__dict__[item]
+        if value is None:
+            self.load_details()
+            value = self.__dict__[item]
+        return value
 
 
 class EmployerEntity(UserEntity):
