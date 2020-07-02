@@ -31,26 +31,48 @@ def client(request):
 
 class TestFreelancehuntClient:
 
+    @pytest.mark.parametrize('args, kwargs, expected', [
+        pytest.param([token], {}, True, id="valid_args"),
+        pytest.param([], {'token': token}, True, id="valid_kwargs"),
+        pytest.param([], {}, False, id="without_args")
+    ])
+    def test_init(self, args, kwargs, expected):
+        try:
+            FreelanceHuntClient(*args, **kwargs)
+        except Exception as E:
+            assert not expected, f'Client has been initialized: {E}'
+        else:
+            assert expected, 'Client not initialized'
+
     def test_projects(self, client: FreelanceHuntClient):
-        assert isinstance(client.projects, Projects)
+        # Not initialized before
+        # and check that it has been initialized
+        assert isinstance(client.projects, Projects) \
+            and hasattr(client, '_projects') and client.projects
 
     def test_feed(self, client: FreelanceHuntClient):
-        assert isinstance(client.feed, Feed)
+        assert isinstance(client.feed, Feed) and hasattr(client, '_feed') \
+            and client.feed
 
     def test_profiles(self, client: FreelanceHuntClient):
-        assert isinstance(client.profiles, Profiles)
+        assert isinstance(client.profiles, Profiles) \
+            and hasattr(client, '_profiles') and client.profiles
 
     def test_threads(self, client: FreelanceHuntClient):
-        assert isinstance(client.threads, Threads)
+        assert isinstance(client.threads, Threads) \
+            and hasattr(client, '_threads') and client.threads
 
     def test_contests(self, client: FreelanceHuntClient):
-        assert isinstance(client.contests, Contests)
+        assert isinstance(client.contests, Contests) \
+            and hasattr(client, '_contests') and client.contests
 
     def test_skills(self, client: FreelanceHuntClient):
-        assert isinstance(client.skills, Skills)
+        assert isinstance(client.skills, Skills) \
+            and hasattr(client, '_skills') and client.skills
 
     def test_countries(self, client: FreelanceHuntClient):
-        assert isinstance(client.countries, Countries)
+        assert isinstance(client.countries, Countries) \
+            and hasattr(client, '_countries') and client.countries
 
     def test_remaining_limit(self, client: FreelanceHuntClient):
         assert client.remaining_limit is None

@@ -3,6 +3,7 @@
 
 # Environment settings
 .env
+Pipenv.lock
 
 # Python package
 dist/
