@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Projects
-from freelancehunt.projects import ProjectEntity
+from freelancehunt.models.project import ProjectEntity
 
 
 class Projects:

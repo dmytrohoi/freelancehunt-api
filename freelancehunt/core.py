@@ -1,15 +1,13 @@
 #!usr/bin/python3
 """Basic classes for API objects."""
-from .utils import Requester
+from .utils.requester import Requester
 
 
-__all__ = [
-    'FreelancehuntObject'
-]
+__all__ = ('FreelancehuntObject',)
 
 
 class FreelancehuntObject:
-    """Parent class for all parts of API."""
+    """Core class for all parts of API."""
     requester = None
 
     def __init__(self, token=None, **kwargs):

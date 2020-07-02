@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Feed
-from freelancehunt.feed import FeedEntity
+from freelancehunt.models.feed import FeedEntity
 
 
 class Feed:

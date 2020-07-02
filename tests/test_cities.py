@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Cities
-from freelancehunt.cities import CityEntity
+from freelancehunt.models.city import CityEntity
 
 
 class Cities:

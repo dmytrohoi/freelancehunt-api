@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Contests
-from freelancehunt.contests import ContestEntity
+from freelancehunt.models.contest import ContestEntity
 
 
 class Contests:

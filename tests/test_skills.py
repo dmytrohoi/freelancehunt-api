@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Skills
-from freelancehunt.skills import SkillEntity
+from freelancehunt.models.skill import SkillEntity
 
 
 class Skills:

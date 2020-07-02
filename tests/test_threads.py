@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Threads
-from freelancehunt.threads import ThreadEntity
+from freelancehunt.models.thread import ThreadEntity
 
 
 class Threads():
