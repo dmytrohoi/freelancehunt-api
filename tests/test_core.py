@@ -1,6 +1,6 @@
 #!usr/bin/python3
 """Basic classes for API objects."""
-from freelancehunt.base import FreelancehuntObject
+from freelancehunt.core import FreelancehuntObject
 
 
 class FreelancehuntObject:

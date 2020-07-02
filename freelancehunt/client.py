@@ -2,23 +2,20 @@
 """Main file of FreelanceHunt API framework."""
 from datetime import datetime, timedelta
 
-from .base import FreelancehuntObject
-from .utils import Requester
+from .core import FreelancehuntObject
 
-from .projects import Projects
-from .feed import Feed
-from .profiles import Profiles
-from .threads import Threads
-from .contests import Contests
-from .countries import Countries
-from .skills import Skills
+from .packages.projects import Projects
+from .packages.feed import Feed
+from .packages.profiles import Profiles
+from .packages.threads import Threads
+from .packages.contests import Contests
+from .packages.countries import Countries
+from .packages.skills import Skills
 
-from .errors import AuthenticationError
+from .utils.errors import AuthenticationError
 
 
-__all__ = [
-    'FreelanceHuntClient'
-]
+__all__ = ('FreelanceHuntClient',)
 
 
 class FreelanceHuntClient(FreelancehuntObject):

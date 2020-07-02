@@ -1,12 +1,10 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
-from .base import FreelancehuntObject
+from ..core import FreelancehuntObject
 
+from ..models.skill import SkillEntity
 
-__all__ = [
-    'Skills',
-    'SkillEntity'
-]
+__all__ = ('Skills',)
 
 
 class Skills(FreelancehuntObject):
@@ -40,18 +38,3 @@ class Skills(FreelancehuntObject):
             raise ValueError(f'Skill with text {text} not found')
 
         return filtered_list
-
-
-class SkillEntity(FreelancehuntObject):
-
-    def __init__(self, id, name, **kwargs):
-        super().__init__()
-        self.id = id
-        self.name = name
-
-    @classmethod
-    def de_json(cls, **data):
-        if not data:
-            return None
-
-        return cls(**data)

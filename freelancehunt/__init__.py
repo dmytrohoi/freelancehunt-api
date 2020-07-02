@@ -1,23 +1,23 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
-from .app import FreelanceHuntClient
-from .utils import Requester
+from .client import FreelanceHuntClient
+from .utils.requester import Requester
 
-from .projects import Projects
-from .feed import Feed
-from .profiles import Profiles
-from .threads import Threads
-from .contests import Contests
-from .countries import Countries
-from .cities import Cities
-from .skills import Skills
-from .reviews import Reviews
+from .packages.projects import Projects
+from .packages.feed import Feed
+from .packages.profiles import Profiles
+from .packages.threads import Threads
+from .packages.contests import Contests
+from .packages.countries import Countries
+from .packages.cities import Cities
+from .packages.skills import Skills
+from .packages.reviews import Reviews
 
 from .version import __version__
 
 __author__ = ['code@dmytrohoi.com']
 
-__all__ = [
+__all__ = (
     'FreelanceHuntClient'
     'Requester',
     'Projects,'
@@ -28,5 +28,5 @@ __all__ = [
     'Contests',
     'Countries',
     'Cities',
-    'Skills'
-]
+    'Skills',
+)

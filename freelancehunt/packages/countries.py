@@ -1,12 +1,11 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
-from .base import FreelancehuntObject
+from ..core import FreelancehuntObject
+from ..models.country import CountryEntity
+
 from .cities import Cities
 
-__all__ = [
-    'Countries',
-    'CountryEntity'
-]
+__all__ = ('Countries',)
 
 
 class Countries(FreelancehuntObject):
@@ -55,19 +54,3 @@ class Countries(FreelancehuntObject):
         if not hasattr(self, '_cities'):
             self._cities = Cities(self.id)
         return self._cities
-
-
-class CountryEntity(FreelancehuntObject):
-
-    def __init__(self, id, iso2, name, **kwargs):
-        super().__init__()
-        self.id = id
-        self.iso2 = iso2
-        self.name = name
-
-    @classmethod
-    def de_json(cls, **data):
-        if not data:
-            return None
-
-        return cls(**data)

@@ -7,14 +7,15 @@ import pytest
 
 from freelancehunt import FreelanceHuntClient
 
-from freelancehunt.projects import Projects
-from freelancehunt.feed import Feed
-from freelancehunt.profiles import Profiles
-from freelancehunt.threads import Threads
-from freelancehunt.contests import Contests
-
-from freelancehunt.countries import Countries
-from freelancehunt.skills import Skills
+from freelancehunt import (
+    Projects,
+    Feed,
+    Profiles,
+    Threads,
+    Contests,
+    Countries,
+    Skills
+)
 
 
 logger = logging.getLogger(__name__)

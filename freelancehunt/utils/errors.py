@@ -11,36 +11,36 @@ __all__ = [
 ]
 
 
-class Error(Exception):
+class FreelancehuntError(Exception):
     """Base class for errors in this module."""
     pass
 
 
-class UnexpectedError(Error):
+class UnexpectedError(FreelancehuntError):
     """Error not recognized by framework."""
     pass
 
 
-class AuthenticationError(Error):
+class AuthenticationError(FreelancehuntError):
     """Authentication error raised by API server."""
     pass
 
 
-class ValidationError(Error):
+class ValidationError(FreelancehuntError):
     """Some fields in POST data is not validated by server."""
     pass
 
 
-class APIRespondingError(Error):
+class APIRespondingError(FreelancehuntError):
     """FreelanceHunt API is not responding now."""
     pass
 
 
-class NotEmployerError(Error):
+class NotEmployerError(FreelancehuntError):
     """Client are not employer."""
     pass
 
 
-class BadRequestError(Error):
+class BadRequestError(FreelancehuntError):
     """Bad request to server."""
     pass

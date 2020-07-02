@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
-from .base import FreelancehuntObject
-from .user import UserEntity, FreelancerEntity, EmployerEntity
+from ..core import FreelancehuntObject
+from ..models.user import UserEntity, FreelancerEntity, EmployerEntity
 
 __all__ = [
     'Profiles',

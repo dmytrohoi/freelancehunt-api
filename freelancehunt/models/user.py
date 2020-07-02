@@ -2,15 +2,15 @@
 """#TODO: Write comments."""
 from datetime import datetime
 
-from .base import FreelancehuntObject
-from .reviews import ReviewEntity
+from ..core import FreelancehuntObject
+from .review import ReviewEntity
 
 
-__all__ = [
+__all__ = (
     'UserEntity',
     'EmployerEntity',
-    'FreelancerEntity'
-]
+    'FreelancerEntity',
+)
 
 
 class UserEntity(FreelancehuntObject):

@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Countries
-from freelancehunt.countries import CountryEntity
+from freelancehunt.models.country import CountryEntity
 
 
 class Countries:
