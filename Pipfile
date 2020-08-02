@@ -10,6 +10,9 @@ flake8 = "*"
 pydocstyle = "*"
 coverage = "*"
 pytest-cov = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+sphinx-autodoc-typehints = "*"
 
 [packages]
 requests = "*"
