@@ -1,14 +1,14 @@
 #!usr/bin/python3
-"""#TODO: Write comments."""
+"""All custom errors."""
 
 
-__all__ = [
+__all__ = (
     'UnexpectedError',
     'AuthenticationError',
     'ValidationError',
     'APIRespondingError',
-    'NotEmployerError'
-]
+    'NotEmployerError',
+)
 
 
 class FreelancehuntError(Exception):

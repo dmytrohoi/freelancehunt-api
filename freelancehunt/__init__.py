@@ -1,5 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
+from . import models
+
 from .client import FreelanceHuntClient
 from .utils.requester import Requester
 
@@ -18,9 +20,9 @@ from .version import __version__
 __author__ = ['code@dmytrohoi.com']
 
 __all__ = (
-    'FreelanceHuntClient'
+    'FreelanceHuntClient',
     'Requester',
-    'Projects,'
+    'Projects',
     'Feed',
     'Profiles',
     'Reviews',
@@ -29,4 +31,5 @@ __all__ = (
     'Countries',
     'Cities',
     'Skills',
+    'models',
 )

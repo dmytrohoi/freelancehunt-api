@@ -1,5 +1,5 @@
 #!usr/bin/python3
-"""TODO: Write comments."""
+"""Requests singleton."""
 import requests
 from datetime import datetime
 from simplejson.errors import JSONDecodeError
@@ -8,13 +8,11 @@ from .errors import AuthenticationError, ValidationError, APIRespondingError, \
                    NotEmployerError, UnexpectedError
 
 
-__all__ = [
-    'Requester',
-]
+__all__ = ('Requester',)
 
 
 class Requester:
-    """TODO: Write comments."""
+    """Provides requests to API. Singleton."""
     # Object singleton
     __requester = None
     # Public attributes
@@ -32,9 +30,6 @@ class Requester:
         Attributes:
             token (str): user personal access token;
             language (str): language of responced data (default: 'en').
-
-        Return:
-            None
 
         """
         self.token = token
