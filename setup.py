@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """The setup and build script for the freelancehunt-api library."""
+import freelancehunt
 from os import path
-import sys
 
 from setuptools import setup, find_packages
 
@@ -16,7 +16,6 @@ def requirements():
 
     return requirements_list
 
-
 packages = find_packages(exclude=['tests*'])
 requirements = requirements()
 
@@ -27,13 +26,13 @@ with open(readme_path, encoding='utf-8') as f:
 
 setup(
     name='freelancehunt-api',
-    version='0.0.1',
+    version=freelancehunt.__version__,
     author='Dmytro Hoi',
     author_email='code@dmytrohoi.com',
-    license='MIT',
+    license='MIT License',
     url='https://freelancehunt-api.dmytrohoi.com/',
     keywords='python freelance api wrapper',
-    description="We have made you a wrapper you can't refuse",
+    description="FreelanceHunt API Python library",
     long_description=long_description,
     long_description_content_type='text/x-rst',
     packages=packages,
@@ -42,7 +41,7 @@ setup(
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT',
+        'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Topic :: Internet',

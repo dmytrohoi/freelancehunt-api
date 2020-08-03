@@ -29,14 +29,19 @@ FreelanceHunt API framework
 Overview
 ============
 
+> **!! DANGER !!: NOT FOR PRODUCTION USE!**
+
 A framework for working with the `FreelanceHunt API <https://apidocs.freelancehunt.com/>`_.
 
 **Requirements**:
   - Python 3.8
   - Requests
 
-.. DANGER::
-  Not for production use!
+**In progress:**
+
+- [ ] Threads API
+- [ ] Thread representation
+- [ ] Tests
 
 =============
 Installation
