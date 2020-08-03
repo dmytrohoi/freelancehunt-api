@@ -1,8 +1,8 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
-from freelancehunt.models.user import UserEntity
-from freelancehunt.models.user import EmployerEntity
-from freelancehunt.models.user import FreelancerEntity
+from freelancehunt.models.user import Profile
+from freelancehunt.models.user import Employer
+from freelancehunt.models.user import Freelancer
 
 
 class UserEntity:
