@@ -1,2 +1,4 @@
 #!usr/bin/python3
-"""#TODO: Write comments."""
+"""Direct usage framework in Terminal.
+
+#TODO: Create command-line interface for framework."""

@@ -1,5 +1,5 @@
 #!usr/bin/python3
-"""#TODO: Write comments."""
+"""Package initialization and import control."""
 from . import models
 
 from .client import FreelanceHuntClient
