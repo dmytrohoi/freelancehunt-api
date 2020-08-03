@@ -29,6 +29,9 @@ FreelanceHunt API framework
   :target: https://freelancehunt-api-python.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
+.. image:: https://app.codacy.com/project/badge/Grade/aa0c2a00cf844651a43c4f9fdc5d9848
+  :target: https://www.codacy.com/manual/dmytrohoi/freelancehunt-api?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dmytrohoi/freelancehunt-api&amp;utm_campaign=Badge_Grade
+
 ============
 Overview
 ============
@@ -78,7 +81,7 @@ The freelancehunt-api documentation `available here <https://freelancehunt-api-p
 The Current Version
 ===================
 
-Now active version is: `0.1.0`
+Now active version is: `0.1.2`
 
 ===============
 Licence
