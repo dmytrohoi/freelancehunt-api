@@ -6,18 +6,7 @@ from os import path
 from setuptools import setup, find_packages
 
 
-def requirements():
-    """Build the requirements list for this project."""
-    requirements_list = []
-
-    with open('requirements.txt') as requirements:
-        for install in requirements:
-            requirements_list.append(install.strip())
-
-    return requirements_list
-
 packages = find_packages(exclude=['tests*'])
-requirements = requirements()
 
 readme_path = path.join(path.abspath(path.dirname(__file__)), 'README.rst')
 with open(readme_path, encoding='utf-8') as f:
@@ -36,10 +25,13 @@ setup(
     long_description=long_description,
     long_description_content_type='text/x-rst',
     packages=packages,
-    install_requires=requirements,
+    install_requires=[
+        'requests==2.23.0',
+        'simplejson==3.17.0'
+    ],
     include_package_data=True,
     classifiers=[
-        'Development Status :: 5 - Production/Stable',
+        'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',

@@ -22,8 +22,12 @@ FreelanceHunt API framework
   :alt: GitHub release (latest by date)
   :target: https://github.com/dmytrohoi/freelancehunt-api/releases
 
-.. image:: https://img.shields.io/github/license/dmytrohoi/freelancehunt-api.svg
-  :target: LICENSE
+.. image:: https://img.shields.io/github/license/dmytrohoi/freelancehunt-api
+  :target: https://github.com/dmytrohoi/freelancehunt-api/tree/master/LICENSE
+
+.. image:: https://readthedocs.org/projects/freelancehunt-api-python/badge/?version=latest
+  :target: https://freelancehunt-api-python.readthedocs.io/en/latest/?badge=latest
+  :alt: Documentation Status
 
 ============
 Overview
@@ -68,7 +72,7 @@ Quick usage:
     print(my_profile.full_name)
     #...
 
-The freelancehunt-api documentation `available here <https://freelancehunt-api.github.io/>`_.
+The freelancehunt-api documentation `available here <https://freelancehunt-api-python.readthedocs.io/>`_.
 
 ===================
 The Current Version
@@ -80,4 +84,4 @@ Now active version is: `0.1.0`
 Licence
 ===============
 
-The freelancehunt-api is `MIT licenced <LICENSE>`_
+The freelancehunt-api is `MIT licenced <https://github.com/dmytrohoi/freelancehunt-api/tree/master/LICENSE>`_

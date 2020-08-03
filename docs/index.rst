@@ -3,15 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to FreelanceHunt API Framework's documentation!
+Main page
 =======================================================
+
+.. include:: ../README.rst
 
 .. toctree::
    :glob:
    :maxdepth: 2
    :caption: Contents:
 
-   installation
+   self
    source/freelancehunt*
 
 Indices and tables
