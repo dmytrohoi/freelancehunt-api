@@ -102,12 +102,12 @@ class FreelanceHuntClient(FreelancehuntObject):
     @property
     def remaining_limit(self) -> int:
         """Current remaining requests limitation."""
-        return self.requester.limit
+        return self._requester.limit
 
     @property
     def left_time_limit_update(self) -> int:
         """Second to update remaining API limits."""
-        last_request_datetime = self.requester.request_date
+        last_request_datetime = self._requester.request_date
         if last_request_datetime is None:
             raise ValueError("No requests found.")
 

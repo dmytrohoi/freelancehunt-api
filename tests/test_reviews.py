@@ -1,7 +1,7 @@
 #!usr/bin/python3
 """#TODO: Write comments."""
 from freelancehunt import Reviews
-from freelancehunt.models.review import ReviewEntity
+from freelancehunt.models.review import Review
 
 
 class Reviews:
