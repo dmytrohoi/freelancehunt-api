@@ -86,12 +86,12 @@ class Contest(FreelancehuntObject):
     :var Optional[str] description: description text, defaults to None
     :var Optional[str] description_html: description text in html formatting, defaults to None
     :var Optional[List[Skill]] ~.skills: required skill for freelancer, defaults to None
-    :var Optional[str] final_started_at: string representation of the closing date, defaults to None
+    :var Optional[datetime] final_started_at: the closing date, defaults to None
     :var Optional[Employer] ~.employer: employer information object, defaults to None
     :var Optional[int] application_count: count of application, defaults to None
     :var Optional[Freelancer] ~.freelancer: freelancer information object, defaults to None
     :var Optional[list] updates: list of all contest updates, defaults to None
-    :var Optional[str] published_at: string representation of the publish date, defaults to None
+    :var Optional[datetime] published_at: the publish date, defaults to None
     :var Optional[dict] links: linked URL, defaults to None
     :var Optional[int] duration_days: contest duration in days, defaults to None
     """

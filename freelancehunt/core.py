@@ -28,10 +28,12 @@ class FreelancehuntObject:
         if page is not None and not isinstance(page, int):
             raise ValueError("Invalid page value {page}".format(page=page))
         elif page:
+            if filters is None:
+                filters = {}
             filters.update({'page[number]': page})
 
         result = self._requester.request("GET", url=url, filters=filters)
-        return self.__parse_data(result["data"])
+        return self.__parse_data(result["data"], result.get("meta"))
 
     def _multi_page_get(
         self,
@@ -59,17 +61,23 @@ class FreelancehuntObject:
             raise ValueError('Post responce data not found!')
         elif not data:
             return True
-        return self.__parse_data(data)
+        return self.__parse_data(data, result.get("meta"))
 
-    def __parse_data(self, data: Optional[Union[dict, list]]) -> Optional[Union[dict, list]]:
+    def __parse_data(self, data: Optional[Union[dict, list]], meta: Optional[dict]) -> Optional[Union[dict, list]]:
         if isinstance(data, list):
-            return [self.__parse_data(info) for info in data]
+            return [self.__parse_data(info, meta) for info in data]
 
         basic_data = {
             "id": data.pop("id"),
             "type": data.pop("type", None),
             "links": data.pop("links", None)
         }
+
+        # Available in Thread.get_message() for ThreadMessages objects
+        # to preserve parent's Thread object
+        if meta:
+            basic_data.update({"meta": meta})
+
         attributes: dict = data.get("attributes", {})
         if attributes:
             basic_data.update(**attributes)

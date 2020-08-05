@@ -104,8 +104,8 @@ class Project(FreelancehuntObject):
     :var Optional[bool] is_personal: sign that the project is private, defaults to None
     :var Optional[dict] updates: project updates, defaults to None
     :var Optional[dict] location: required location for the executor, defaults to None
-    :var Optional[datetime] expired_at: string representation of the expire date, defaults to None
-    :var Optional[datetime] published_at: string representation of the publish date, defaults to None
+    :var Optional[datetime] expired_at: the expire date, defaults to None
+    :var Optional[datetime] published_at: the publish date, defaults to None
     :var Optional[dict] links: URLs related to project, defaults to None
     """
 

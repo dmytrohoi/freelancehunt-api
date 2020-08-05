@@ -19,7 +19,7 @@ setup(
     author='Dmytro Hoi',
     author_email='code@dmytrohoi.com',
     license='MIT License',
-    url='https://freelancehunt-api.dmytrohoi.com/',
+    url='https://github.com/dmytrohoi/freelancehunt-api',
     keywords='python freelance api wrapper',
     description="FreelanceHunt API Python library",
     long_description=long_description,

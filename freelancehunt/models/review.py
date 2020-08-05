@@ -75,12 +75,12 @@ class Review(FreelancehuntObject):
     """Create object to provide operations with Project.
 
     :var int id: review unique identifier
-    :var datetime published_at: string representation of the publish date
+    :var datetime published_at: the publish date
     :var str comment: comment from creator
     :var dict grades: grades of work quality
     :var Union[Employer,Freelancer] creator: review creator information
     :var bool is_pending: sign that the project is pending
-    :var Optional[datetime] pending_ends_at: string representation of the pending date, defaults to None
+    :var Optional[datetime] pending_ends_at: the pending date, defaults to None
     :var Optional[Project] ~.project: related project object, defaults to None
     """
 

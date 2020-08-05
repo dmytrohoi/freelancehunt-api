@@ -81,6 +81,14 @@ freelancehunt.models.thread module
    :undoc-members:
    :show-inheritance:
 
+freelancehunt.models.threadmessage module
+-----------------------------------------
+
+.. automodule:: freelancehunt.models.threadmessage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 freelancehunt.models.user module
 --------------------------------
 

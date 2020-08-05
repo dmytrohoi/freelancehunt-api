@@ -46,9 +46,9 @@ A framework for working with the `FreelanceHunt API <https://apidocs.freelancehu
 
 **In progress:**
 
-- [ ] Threads API
-- [ ] Thread representation
+- [ ] Threads API: Delete ThreadMessage, Create Support request, Send attachment
 - [ ] Tests
+- [x] Thread and ThreadMessage representation
 
 =============
 Installation
@@ -81,7 +81,7 @@ The freelancehunt-api documentation `available here <https://freelancehunt-api-p
 The Current Version
 ===================
 
-Now active version is: `0.1.2`
+Now active version is: `0.1.3`
 
 ===============
 Licence

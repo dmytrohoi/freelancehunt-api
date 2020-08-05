@@ -49,8 +49,7 @@ class Requester:
 
         """
         # Serialize object of dataclasses to JSON
-        if (payload is not None or not isinstance(payload, dict)) \
-           and request_type in ["POST", "PATCH", "DEL"]:
+        if payload and not isinstance(payload, dict):
             payload = payload.__dict__
         # Make filters params for GET requests
         if filters and request_type == "GET":
@@ -111,13 +110,13 @@ class Requester:
 
         """
         # No errors found and no content returned
-        if status_code in [200, 204]:
+        if status_code in [200, 201, 204]:
             return
 
         # Specific error messages constants
         API_NOT_RESPONDING = "Version 2 is not supported"
         # Error attributes shortcuts
-        error_title = json_data["error"]["title"]
+        error_title = json_data.get("error")["title"]
         error_detail = json_data["error"].get("detail")
 
         # Not employer errors check

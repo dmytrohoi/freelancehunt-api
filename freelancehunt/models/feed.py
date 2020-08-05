@@ -54,7 +54,7 @@ class FeedMessage(FreelancehuntObject):
     :var int id: feed message unique identifier
     :var Union[Employer,Freelancer] message_from: message sender user object
     :var str message: the feed message text
-    :var str created_at: string representation of the creation date
+    :var datetime created_at: of the creation date
     :var bool is_new: sign that the message is new
     :var Optional[Project] ~.project: linked project object, defaults to None
     :var Optional[Contest] ~.contest: linked contest object, defaults to None
