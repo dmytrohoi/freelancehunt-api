@@ -1,9 +1,18 @@
 #!/usr/bin/env python
 """The setup and build script for the freelancehunt-api library."""
-import freelancehunt
 from os import path
 
 from setuptools import setup, find_packages
+from distutils.util import convert_path
+
+
+def get_version(package):
+    main_ns = {}
+    ver_path = convert_path(f'{package}/version.py')
+    with open(ver_path) as ver_file:
+        exec(ver_file.read(), main_ns)
+
+    return main_ns['__version__']
 
 
 packages = find_packages(exclude=['tests*'])
@@ -15,7 +24,7 @@ with open(readme_path, encoding='utf-8') as f:
 
 setup(
     name='freelancehunt-api',
-    version=freelancehunt.__version__,
+    version=get_version('freelancehunt'),
     author='Dmytro Hoi',
     author_email='code@dmytrohoi.com',
     license='MIT License',
