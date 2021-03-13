@@ -1,15 +1,19 @@
 #!usr/bin/python3
 """Requests singleton."""
-from typing import Type
-import requests
+from typing import Any, Dict, Literal, Optional, Type
 from datetime import datetime
-from simplejson.errors import JSONDecodeError
 
-from .errors import AuthenticationError, ValidationError, APIRespondingError, \
-                   NotEmployerError, UnexpectedError
+import requests
+from json import JSONDecodeError
+
+from .errors import handle_errors
 
 
 __all__ = ('Requester',)
+
+
+ACCEPTABLE_LANGS = ('en', 'ru', 'uk')
+LIMIT_HEADER = "X-RateLimit-Remaining"
 
 
 class Requester:
@@ -50,11 +54,20 @@ class Requester:
         :param str language: language of responced data, default to 'en'.
         """
         self.token = token
-        self.__headers = {'Authorization': f'Bearer {self.token}'}
-        if language in ['en', 'ru', 'uk']:
-            self.__headers['Accept-Language'] = language
+        self.__headers = {
+            'Authorization': f'Bearer {self.token}',
+            'Accept-Language': language if language in ACCEPTABLE_LANGS else "en"
+        }
 
-    def request(self, request_type, url, filters=None, payload=None, headers={}, files=None) -> dict:
+    def request(
+        self,
+        request_type: Literal["POST", "GET", "PATCH", "DEL"],
+        url: str,
+        filters: Optional[dict] = None,
+        payload: Optional[dict] = None,
+        headers: Optional[dict] = {},
+        files: Optional[dict] = None
+    ) -> Dict[str, Any]:
         """Make request to API and handle results.
 
         :param str request_type: request type ("POST", "GET", "PATCH" or "DEL").
@@ -120,62 +133,21 @@ class Requester:
                 json_data = {}
 
         # Handling errors
-        self._handle_errors(responce.status_code, request_url, json_data)
+        handle_errors(responce.status_code, request_url, json_data)
 
         # Set requests limit
         self._set_current_limit(responce.headers)
 
         return json_data
 
-    def _handle_errors(self, status_code, request_url, json_data):
-        """
-        Handle errors in responce data and throw custom API error for some
-        common types of error.
-
-        :param int status_code: responce status code for request.
-        :param str request_url: url for request.
-        :param dict json_data: responce data in dictionary.
-        """
-        # No errors found and no content returned
-        if status_code // 100 == 2:
-            return
-
-        # Specific error messages constants
-        API_NOT_RESPONDING = "Version 2 is not supported"
-        # Error attributes shortcuts
-        error_title = json_data.get("error")["title"]
-        error_detail = json_data["error"].get("detail")
-
-        # Not employer errors check
-        if status_code == 400 and '/my/projects' in request_url:
-            # TODO: Check all possible restricted urls
-            raise NotEmployerError("Look's like you are not employer.")
-
-        # Unauthorized
-        elif status_code == 401:
-            raise AuthenticationError(
-                "Please check your token, look's like is not valid:",
-                error_title, error_detail
-            )
-        # Validation error for POST data
-        elif status_code == 422:
-            raise ValidationError(error_title, error_detail)
-        # Check API availability error
-        elif status_code == 404 and error_detail == API_NOT_RESPONDING:
-            raise APIRespondingError(
-                "API not responding now, please try again later."
-            )
-        else:
-            raise UnexpectedError(error_title, error_detail)
-
-    def _set_current_limit(self, headers):
+    def _set_current_limit(self, headers: dict):
         """Store API limitation from responce headers.
 
         :param dict headers: responce headers.
         """
-        date_pattern = "%a, %d %b %Y %H:%M:%S %Z"
-        self.request_date = datetime.strptime(headers.get("Date"), date_pattern)
-        self.limit = int(headers.get("X-RateLimit-Remaining"))
+        DATE_PATTERN = "%a, %d %b %Y %H:%M:%S %Z"
+        self.request_date = datetime.strptime(headers.get("Date"), DATE_PATTERN)
+        self.limit = int(headers.get(LIMIT_HEADER))
 
     @classmethod
     def get_requester(cls, token=None, **kwargs) -> Type["Requester"]:

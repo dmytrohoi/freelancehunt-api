@@ -186,17 +186,3 @@ class FreelancehuntObject:
         else:
             basic_data.update(**data)
         return basic_data
-
-    @staticmethod
-    def _filter_list_by_attr(
-        objects: List[FreelancehuntObject],
-        attribute: str
-    ) -> list:
-        """Filter objects in list when attribute is True.
-
-        :param List[FreelancehuntObject] objects: list of objects to filter
-        :param str attribute: name of the desired available attribute
-        :return: filtered list
-        :rtype: List[FreelancehuntObject]
-        """
-        return list(filter(lambda obj: getattr(obj, attribute), objects))

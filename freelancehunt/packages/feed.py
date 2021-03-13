@@ -6,6 +6,7 @@ from ..core import FreelancehuntObject
 
 from ..models.feed import FeedMessage
 
+from ..utils import common as utils
 
 __all__ = ('Feed',)
 
@@ -40,16 +41,16 @@ class Feed(FreelancehuntObject):
     @property
     def projects(self) -> List[FeedMessage]:
         """Get all messages with linked project in feed."""
-        return self._filter_list_by_attr(self.list, '_project')
+        return utils.filter_list_by_attr(self.list, '_project')
 
     @property
     def contests(self) -> List[FeedMessage]:
         """Get all messages with linked contest in feed."""
-        return self._filter_list_by_attr(self.list, '_contest')
+        return utils.filter_list_by_attr(self.list, '_contest')
 
     def get_new(self) -> List[FeedMessage]:
         """Get all new notifications in feed."""
-        return self._filter_list_by_attr(self.list, 'is_new')
+        return utils.filter_list_by_attr(self.list, 'is_new')
 
     @property
     def list(self) -> List[FeedMessage]:

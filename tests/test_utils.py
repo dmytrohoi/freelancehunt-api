@@ -21,9 +21,6 @@ class Requester:
     def request(self, request_type, url, filters=None, payload=None):
         pass
 
-    def _handle_errors(self, status_code, request_url, json_data):
-        pass
-
     def _set_current_limit(self, headers):
         pass
 

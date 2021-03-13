@@ -21,6 +21,3 @@ class FreelancehuntObject:
 
     def __parse_data(self, data: dict):
         pass
-
-    def _filter_list_by_attr(self, objects, attribute):
-        pass
