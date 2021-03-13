@@ -15,15 +15,13 @@ class Threads(FreelancehuntObject):
 
     .. warning:: For directly usage please set `token` argument.
 
-    :param str token: your API token, optional
+        **token** (`str`) your API token, optional
+
     """
 
-    def __init__(self, token: Optional[str] = None, **kwargs):
-        """Create object to provide operations with Threads API part.
-
-        :param token: your API token (only for directly usage, not inside Client class), defaults to None
-        """
-        super().__init__(token, **kwargs)
+    def __init__(self, **kwargs):
+        """Create object to provide operations with Threads API part."""
+        super().__init__(**kwargs)
 
     def get_threads(self, pages: Union[int, Tuple[int], List[int]] = 1) -> List[Thread]:
         """Get list of threads.
@@ -36,11 +34,10 @@ class Threads(FreelancehuntObject):
     def create_thread(self, to_profile_id: int, subject: str, message_html: str) -> Thread:
         """Create new thread.
 
-        :param int to_profile_id: recipient profile id
-        :param str subject: thread subject
-        :type subject:
-        :param str message_html: the first thread's message
-        :return: created thread
+        :param int to_profile_id: recipient profile id.
+        :param str subject: thread subject.
+        :param str message_html: the first thread's message.
+        :return: created thread.
         """
         thread = {
             "subject": subject,
@@ -48,4 +45,18 @@ class Threads(FreelancehuntObject):
             "to_profile_id": to_profile_id
         }
         responce = self._post("/threads", thread)
+        return Thread.de_json(**responce)
+
+    def create_support_request(self, subject: str, message_html: str) -> Thread:
+        """Create new support request.
+
+        :param str subject: thread subject.
+        :param str message_html: the first thread's message.
+        :return: created support request thread.
+        """
+        thread = {
+            "subject": subject,
+            "message_html": message_html,
+        }
+        responce = self._post("/threads/action/support", thread)
         return Thread.de_json(**responce)

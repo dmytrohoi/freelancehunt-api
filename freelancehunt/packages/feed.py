@@ -15,17 +15,15 @@ class Feed(FreelancehuntObject):
 
     .. warning:: For directly usage please set `token` argument.
 
-    :param str token: your API token, optional
+        **token** (`str`) your API token, optional
+
     """
 
     _latest_feed = []
 
-    def __init__(self, token: Optional[str] = None, **kwargs):
-        """Creates object to provide operations with Feed API part.
-
-        :param token: your API token (only for directly usage, not inside Client class), defaults to None
-        """
-        super().__init__(token, **kwargs)
+    def __init__(self, **kwargs):
+        """Creates object to provide operations with Feed API part."""
+        super().__init__(**kwargs)
 
     def update(self):
         """Get latest feed information."""

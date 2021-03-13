@@ -13,15 +13,13 @@ class Profiles(FreelancehuntObject):
 
     .. warning:: For directly usage please set `token` argument.
 
-    :param str token: your API token, optional
+        **token** (`str`) your API token, optional
+
     """
 
-    def __init__(self, token: Optional[str] = None, **kwargs):
-        """Create object to provide operations with Profiles API part.
-
-        :param token: your API token (only for directly usage, not inside Client class), defaults to None
-        """
-        super().__init__(token, **kwargs)
+    def __init__(self, **kwargs):
+        """Create object to provide operations with Profiles API part."""
+        super().__init__(**kwargs)
 
     @property
     def my_profile(self) -> Union[Employer, Freelancer]:

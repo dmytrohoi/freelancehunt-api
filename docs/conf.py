@@ -23,7 +23,7 @@ import freelancehunt
 # -- Project information -----------------------------------------------------
 
 project = 'FreelanceHunt API Framework'
-copyright = '2020, Dmytro Hoi'
+copyright = '2021, Dmytro Hoi'
 author = 'Dmytro Hoi'
 
 

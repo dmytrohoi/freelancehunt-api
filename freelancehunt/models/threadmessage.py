@@ -90,7 +90,7 @@ class ThreadMessage(FreelancehuntObject):
                  sender: Profile,
                  recipient: Profile,
                  attachments: Optional[list] = None,
-                 thread: Optional[dict] = None,
+                 thread: dict = {},
                  **kwargs):
         """Create object to provide operations with ThreadMessage.
 
@@ -113,8 +113,9 @@ class ThreadMessage(FreelancehuntObject):
         self.recipient = recipient
         # Will be parsed to objects
         self._thread = thread
+        self.thread_id = self._thread.get('id')
         # Custom attributes
-        self._create_msg_url = f"/threads/{self._thread.get('id')}" if self._thread else None
+        self._create_msg_url = f"/threads/{self.thread_id}" if self._thread else None
 
     def answer(self, message_html: str) -> Type["ThreadMessage"]:
         """Answer to this message in current thread.

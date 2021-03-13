@@ -14,21 +14,22 @@ __all__ = ('Cities',)
 class Cities(FreelancehuntObject):
     """Provide operations with Cities API part.
 
-    .. note:: This module contains static content. It may be `update()`, but loaded info does not change on the API side.
+    .. note:: This module contains static content. It may be `update()`,
+        but loaded info does not change on the API side.
 
     .. warning:: For directly usage please set `token` argument.
 
-    :param str token: your API token, optional
+        **token** (`str`) your API token, optional
+
     :param int country_id: API-related country identifier to get cities of it
     """
 
-    def __init__(self, country_id: int, token: Optional[str] = None, **kwargs):
+    def __init__(self, country_id: int, **kwargs):
         """Create object to provide operations with Cities API part.
 
         :param country_id: the desired country to get cities.
-        :param token: your API token (only for directly usage, not inside Client class), defaults to None
         """
-        super().__init__(token, **kwargs)
+        super().__init__(**kwargs)
         self.country_id = country_id
 
         self._url = f'/cities/{self.country_id}'

@@ -36,19 +36,18 @@ FreelanceHunt API framework
 Overview
 ============
 
-> **!! DANGER !!: NOT FOR PRODUCTION USE!**
-
 A framework for working with the `FreelanceHunt API <https://apidocs.freelancehunt.com/>`_.
 
 **Requirements**:
   - Python 3.8
   - Requests
 
-**In progress:**
+**Not available**:
+  - Contest Workspace
+  - Project Workspace
 
-- [ ] Threads API: Delete ThreadMessage, Create Support request, Send attachment
-- [ ] Tests
-- [x] Thread and ThreadMessage representation
+**In progress**:
+  - Tests
 
 =============
 Installation
@@ -81,7 +80,7 @@ The freelancehunt-api documentation `available here <https://freelancehunt-api-p
 The Current Version
 ===================
 
-Now active version is: `0.1.3`
+Now active version is: `1.0.0`
 
 ===============
 Licence

@@ -328,14 +328,22 @@ class Profile(FreelancehuntObject):
 
 
 class Employer(Profile):
-    """Provide operations with Employer profile."""
+    """Provide operations with Employer profile.
+
+    .. note:: See :class:`Profile` for details.
+
+    """
 
     def __str__(self):
         return f'Employer {self.id} ({self.full_name})'
 
 
 class Freelancer(Profile):
-    """Provide operations with Freelancer profile."""
+    """Provide operations with Freelancer profile.
+
+    .. note:: See :class:`Profile` for details.
+
+    """
 
     def __str__(self):
         return f'Freelancer {self.id} ({self.full_name})'

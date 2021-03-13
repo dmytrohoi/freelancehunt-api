@@ -60,6 +60,10 @@ class BudgetInfo(FreelancehuntObject):
         """
         return self.currency == "RUB"
 
+    def to_dict(self) -> dict:
+        """Dictionary representation of BudgetInfo."""
+        return {'amount': self.amount, 'currency': self.currency}
+
     @classmethod
     def de_json(cls, **data) -> Type["BudgetInfo"]:
         """Parse json data from API responce and make object of this class.

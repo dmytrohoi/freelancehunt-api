@@ -63,7 +63,7 @@ Documentation example:
 
 """
 from __future__ import annotations
-from typing import List, Optional, Type
+from typing import List, Optional, Type, Union
 from datetime import datetime
 
 from ..core import FreelancehuntObject
@@ -172,6 +172,42 @@ class Contest(FreelancehuntObject):
     def load_details(self):
         """Load details about current Contest and reload all attributes."""
         responce = self._get(self.api_url)
+        new = self.de_json(**responce)
+        self.__dict__ = new.__dict__
+
+    def add_update(self, update_html: str):
+        """Add details to current Contest and reload all attributes."""
+        payload = {'update_html': update_html}
+        responce = self._post(self.api_url + "/amend", payload=payload)
+        new = self.de_json(**responce)
+        self.__dict__ = new.__dict__
+
+    def update(
+        self,
+        name: str,
+        budget: Union[BudgetInfo, dict],
+        duration_days: int,
+        description_html: str,
+        is_stock_allowed: Optional[bool] = None,
+        tags: Optional[List[str]] = None
+    ):
+        """Update details to current Contest and reload all attributes.
+
+        .. warning: Works only if contest not published yet.
+
+        """
+        payload = {
+            'name': name,
+            'budget': budget.__dict__ if isinstance(budget, BudgetInfo) else budget,
+            'duration_days': duration_days,
+            'description_html': description_html
+        }
+        if is_stock_allowed:
+            payload.update({'is_stock_allowed': is_stock_allowed})
+        if tags:
+            payload.update({'tags': tags})
+
+        responce = self._patch(self.api_url + "/amend", payload=payload)
         new = self.de_json(**responce)
         self.__dict__ = new.__dict__
 

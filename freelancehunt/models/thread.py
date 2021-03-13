@@ -67,7 +67,7 @@ Documentation example:
     }
 """
 from datetime import datetime
-from typing import List, Tuple, Type, Union
+from typing import ByteString, Dict, List, Tuple, Type, Union
 
 from ..core import FreelancehuntObject
 from ..utils.errors import BadRequestError
@@ -131,14 +131,65 @@ class Thread(FreelancehuntObject):
         self.api_url = f"/threads/{self.id}"
 
     def get_messages(self, pages: Union[int, Tuple[int], List[int]] = 1) -> List[ThreadMessage]:
+        """Get messages of this thread.
+
+        :param Union[int,Tuple[int],List[int]] pages: thread unique identifier, defaults to None
+        :return: list of message object associated with this Thread.
+        """
         responce = self._multi_page_get(self.api_url, pages=pages)
         return [ThreadMessage.de_json(**data) for data in responce]
 
-    def answer(self, message_html: str):
+    def answer(self, message_html: str) -> ThreadMessage:
+        """Send answer in this thread.
+
+        :param str message_html: thread unique identifier, defaults to None
+        :raises BadRequestError: raises if message not send.
+        :return: message object associated with sended message.
+        """
         message = self._post(self.api_url, payload={"message_html": message_html})
         if not message:
             raise BadRequestError(
                 f"Message not send to '{self.api_url}' with text '{message_html}'!"
+            )
+
+        message.update({"thread": {"id": self.id}})
+        return ThreadMessage.de_json(**message)
+
+    def delete(self) -> bool:
+        """Delete thread.
+
+        :param str message_html: thread unique identifier, defaults to None
+        :raises BadRequestError: raises if message not deleted.
+        :return: `True` if delete success.
+        """
+        try:
+            return self._delete(self.api_url)
+        except ValueError:
+            raise BadRequestError(
+                f"Thread with {self.id} not deleted!"
+            )
+
+    def send_attachment(self, **files: Dict[str, Tuple[str, bytes, str]]) -> ThreadMessage:
+        """Send attachment in this thread.
+
+        .. note::
+            Use unique filename and associated file in bytes.
+            The files argument can be passed in format:
+
+            .. code-block:: python
+
+                with open('/home/my/Downloads/files.rar','rb') as f:
+                    files = {'uniquefilename': ('files.rar', f, 'application/x-rar-compressed')}
+                    Thread.send_attachment(**files)
+
+        :param Dict[str,Tuple[str,bytes,str]] files: thread unique identifier, defaults to None.
+        :raises BadRequestError: raises if message not send.
+        :return: object associated with sended message.
+        """
+        message = self._post_attachment(f"{self.api_url}/attachment", files=files)
+        if not message:
+            raise BadRequestError(
+                f"Attachment not send to '{self.api_url}'!"
             )
 
         message.update({"thread": {"id": self.id}})
@@ -165,4 +216,3 @@ class Thread(FreelancehuntObject):
             data["recipient"] = Profile.de_json(**recipient)
 
         return cls(**data)
-

@@ -1,5 +1,6 @@
 #!usr/bin/python3
 """Requests singleton."""
+from typing import Type
 import requests
 from datetime import datetime
 from simplejson.errors import JSONDecodeError
@@ -13,6 +14,7 @@ __all__ = ('Requester',)
 
 class Requester:
     """Provides requests to API. Singleton."""
+
     # Object singleton
     __requester = None
     # Public attributes
@@ -23,30 +25,45 @@ class Requester:
     __basic_url = "https://api.freelancehunt.com/v2"
     __headers = None
 
-    def __init__(self, token, language='en', **kwargs):
+    def __new__(cls, token=None, *args, **kwargs):
+        """Get or create Requester singleton object.
+
+        :param Optional[str] token: user personal access token.
+        :return: Requester object.
+        :rtype: Requester
         """
-        Set general parameters for all requests.
+        if not cls.__requester and not token:
+            raise AttributeError(
+                'Requester object not found, please give your API token '
+                'to initiate it.'
+            )
+        elif token:
+            cls.__requester = super().__new__(*args, **kwargs)
+        return cls.__requester
 
-        Attributes:
-            token (str): user personal access token;
-            language (str): language of responced data (default: 'en').
 
+
+    def __init__(self, token, language='en', **kwargs):
+        """Set general parameters for all requests.
+
+        :param str token: user personal access token.
+        :param str language: language of responced data, default to 'en'.
         """
         self.token = token
         self.__headers = {'Authorization': f'Bearer {self.token}'}
         if language in ['en', 'ru', 'uk']:
             self.__headers['Accept-Language'] = language
 
-    def request(self, request_type, url, filters=None, payload=None):
-        """
-        Make request to API and handle results.
+    def request(self, request_type, url, filters=None, payload=None, headers={}, files=None) -> dict:
+        """Make request to API and handle results.
 
-        Args:
-            request_type (str): "POST", "GET", "PATCH" or "DEL".
-
-        Return:
-            dict: JSON responce data in dict
-
+        :param str request_type: request type ("POST", "GET", "PATCH" or "DEL").
+        :param Optional[dict] filters: get parameter query, default to None.
+        :param Optional[dict] payload: get parameter query, default to None.
+        :param Optional[dict] headers: custom headers for request, default to None.
+        :param Optional[dict] files: files to post attachment, default to None.
+        :return: JSON responce data in dict
+        :rtype: dict
         """
         # Serialize object of dataclasses to JSON
         if payload and not isinstance(payload, dict):
@@ -72,21 +89,36 @@ class Requester:
             else:
                 filters = None
 
+        request_headers = self.__headers.copy()
+        request_headers.update(headers)
+
         request_url = self.__basic_url + url
+
+        if payload:
+            data = {'json': payload}
+        elif files:
+            data = {'files': files}
+        else:
+            data = {}
+
         responce = requests.request(
             method=request_type,
             url=request_url,
             params=filters,
-            headers=self.__headers,
-            json=payload
+            headers=request_headers,
+            **data
         )
-        # No value in some POST request
-        try:
-            json_data = responce.json()
-        except JSONDecodeError as E:
-            if request_type != "POST":
-                raise E
-            json_data = {}
+
+        json_data = None
+        if request_type not in ["DELETE"]:
+            # No value in some POST request
+            try:
+                json_data = responce.json()
+            except JSONDecodeError as E:
+                if request_type != "POST":
+                    raise E
+                json_data = {}
+
         # Handling errors
         self._handle_errors(responce.status_code, request_url, json_data)
 
@@ -100,17 +132,12 @@ class Requester:
         Handle errors in responce data and throw custom API error for some
         common types of error.
 
-        Attributes:
-            status_code (int): responce status code for request;
-            request_url (str): ;
-            json_data (dict): responce data in dictionary.
-
-        Return:
-            None
-
+        :param int status_code: responce status code for request.
+        :param str request_url: url for request.
+        :param dict json_data: responce data in dictionary.
         """
         # No errors found and no content returned
-        if status_code in [200, 201, 204]:
+        if status_code // 100 == 2:
             return
 
         # Specific error messages constants
@@ -142,22 +169,24 @@ class Requester:
             raise UnexpectedError(error_title, error_detail)
 
     def _set_current_limit(self, headers):
-        """
-        Store API limitation from responce headers.
+        """Store API limitation from responce headers.
 
-        Attributes:
-            headers (dict): responce headers.
-
-        Return:
-            None
-
+        :param dict headers: responce headers.
         """
         date_pattern = "%a, %d %b %Y %H:%M:%S %Z"
         self.request_date = datetime.strptime(headers.get("Date"), date_pattern)
         self.limit = int(headers.get("X-RateLimit-Remaining"))
 
     @classmethod
-    def get_requester(cls, token=None, **kwargs):
+    def get_requester(cls, token=None, **kwargs) -> Type["Requester"]:
+        """Get or create Requester singleton object.
+
+        .. note: a method of implementing singleton pattern.
+
+        :param Optional[str] token: user personal access token.
+        :return: Requester object.
+        :rtype: Requester
+        """
         if not cls.__requester and not token:
             raise AttributeError(
                 'Requester object not found, please give your API token '
